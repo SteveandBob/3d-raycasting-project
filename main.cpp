@@ -8,18 +8,18 @@ const unsigned int WIDTH = 800;
 const unsigned int HEIGHT = 600;
 
 const char* vertexShaderSource = "#version 330 core\n"
-"layout (location = 0) in vec3 aPos;\n"
-"void main()\n"
-"{\n"
-"	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-"}\0";
+	"layout (location = 0) in vec3 aPos;\n"
+	"void main()\n"
+	"{\n"
+	"	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+	"}\0";
 
 const char* fragmentShaderSource = "#version 330 core\n"
-"out vec4 FragColour;\n"
-"void main()\n"
-"{\n"
-"	FragColour = vec4(0.8f, 0.4f, 0.0f, 1.0f);\n"
-"}\0";
+	"out vec4 FragColour;\n"
+	"void main()\n"
+	"{\n"
+	"	FragColour = vec4(0.8f, 0.4f, 0.0f, 1.0f);\n"
+	"}\0";
 
 int main();
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -114,14 +114,18 @@ int main() {
 	wall.y1 = 4;
 	wall.y2 = 4;
 
+	//Take UnitVector and project it forward in steps until it hits a part of the wall, do this for every pixel in the camera's view.
+	//SET THE LEFT AND RIGHT UNITVECTORS TO A 45DEG FOV
 	UnitVector camera_left;
 	camera_left.normal = sqrt(wall.x1 * wall.x1 + wall.y1 * wall.y1);
 	camera_left.x = wall.x1/camera_left.normal;
 	camera_left.y = wall.y1/camera_left.normal;
+	camera_left.normal = 1.0f;
 	UnitVector camera_right;
 	camera_right.normal = sqrt(wall.x2 * wall.x2 + wall.y2 * wall.y2);
 	camera_right.x = wall.x2/camera_right.normal;
 	camera_right.y = wall.y2/camera_right.normal;
+	camera_right.normal = 1.0f;
 
 	//VERTICES OF WALL
 	float vertices[] {
